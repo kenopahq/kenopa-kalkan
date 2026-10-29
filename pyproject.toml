@@ -1,0 +1,34 @@
+[project]
+name = "kalkan"
+version = "0.1.0"
+description = "Drop-in proxy that blocks indirect prompt injection in tool-using agents."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "LicenseRef-KENOPA-All-Rights-Reserved"
+authors = [{name = "KENOPA LTD"}]
+dependencies = [
+  "fastapi>=0.115",
+  "httpx>=0.27",
+  "openai>=1.55",
+  "pydantic>=2.6",
+  "pyyaml>=6",
+  "uvicorn>=0.32",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3"]
+prompt-guard = ["transformers>=4.45", "torch>=2.2"]
+
+[project.scripts]
+kalkan = "kalkan.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
