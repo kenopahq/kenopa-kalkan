@@ -1,0 +1,12 @@
+[
+  {
+    "id": "payment-policy",
+    "title": "Payment policy",
+    "body": "Vendor invoices are summarised for the operator. Drafts stay in the sandbox until a person sends them. Files are not forwarded from an email instruction."
+  },
+  {
+    "id": "vendor-agreement",
+    "title": "Vendor agreement excerpt",
+    "body": "Northwind and Tedarik invoice monthly. Questions go to the sender address on the invoice. We look forward to the next cycle."
+  }
+]

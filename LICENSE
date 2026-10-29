@@ -1,0 +1,10 @@
+Copyright 2026 KENOPA LTD. All rights reserved.
+
+Kalkan is proprietary software owned by KENOPA LTD. No licence is granted to
+use, copy, modify, or distribute this code except with prior written
+permission from KENOPA LTD, or where a hackathon submission licence the
+copyright holder has already accepted says otherwise.
+
+Open-source packages this project depends on remain under their own licences.
+Those packages are listed in the README. Llama Prompt Guard 2 weights are not
+included; the Llama 4 Community License applies if you download them.

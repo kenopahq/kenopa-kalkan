@@ -1,0 +1,15 @@
+Kalkan
+Copyright 2026 KENOPA LTD. All rights reserved.
+
+This product can call Llama Prompt Guard 2 86M (meta-llama/Llama-Prompt-Guard-2-86M).
+The model weights are not shipped in this repository. Downloading or running
+them requires accepting the Llama 4 Community License on Hugging Face, under
+your own Hugging Face account. See:
+https://huggingface.co/meta-llama/Llama-Prompt-Guard-2-86M
+
+Kalkan's offline heuristic screen is original KENOPA code. It is not
+Llama Prompt Guard, and metrics produced while that heuristic is loaded
+must not be described as Prompt Guard results.
+
+Third-party Python packages are imported, not vendored. Their licences are
+declared in README.md.

@@ -1,0 +1,33 @@
+# Offline heuristic patterns for pass 1 when Llama Prompt Guard 2 weights
+# are not loaded. These are Kalkan's patterns, not the Prompt Guard model.
+# Matched against normalized text (case-folded, zero-width characters removed,
+# a small set of Latin/Cyrillic confusables folded).
+patterns:
+  - id: en-ignore-previous
+    regex: 'ignore (?:all |any |the )?(?:previous|prior|above|earlier) (?:instructions|directions|prompts|rules)'
+  - id: en-disregard
+    regex: 'disregard (?:the )?(?:system|developer|previous|prior)'
+  - id: en-dont-tell
+    regex: 'do not (?:tell|inform|alert|notify) the user'
+  - id: en-forward-files
+    regex: '(?:forward|exfiltrate) (?:all |the |every )?(?:files|documents|secrets|attachments)'
+  - id: en-send-secrets
+    regex: 'send (?:the |all )?(?:secrets|\.env|credentials|files) to'
+  - id: en-new-instructions
+    regex: 'new (?:system )?instructions'
+  - id: en-you-are-now
+    regex: 'you are now'
+  - id: tr-onceki-talimat
+    regex: 'önceki talimat'
+  - id: tr-talimat-yok-say
+    regex: 'talimatları (?:yok say|görmezden gel)'
+  - id: tr-kullaniciya-soyleme
+    regex: 'kullanıcıya (?:söyleme|bildirme|gösterme)'
+  - id: tr-tum-dosyalari
+    regex: 'tüm dosyaları'
+  - id: tr-dosyalari-ilet
+    regex: 'dosyaları .{0,80}(?:ilet|gönder|yolla|aktar)'
+  - id: tr-gizli-talimat
+    regex: 'gizli talimat'
+  - id: tr-sistem
+    regex: 'sistem (?:prompt|talimat)'

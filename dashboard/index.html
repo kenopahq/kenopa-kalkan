@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kalkan — agent firewall</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <div>
+        <p class="eyebrow">KENOPA LTD · Startup track</p>
+        <h1>Kalkan</h1>
+        <p class="lede">A firewall in front of a tool-using agent. Pass 1 screens the text. Pass 2 judges the tool call against the user’s intent.</p>
+      </div>
+    </div>
+    <div class="status" id="status">Loading status…</div>
+  </header>
+
+  <main>
+    <section class="panel" id="scenario-panel">
+      <div class="panel-head">
+        <h2>Sandbox invoice</h2>
+        <div class="controls">
+          <label>Scenario
+            <select id="scenario">
+              <option value="tr-invoice">Turkish invoice</option>
+              <option value="en-invoice">English invoice</option>
+            </select>
+          </label>
+          <button type="button" id="run-off" class="danger">Run unprotected</button>
+          <button type="button" id="run-screen">Screen only</button>
+          <button type="button" id="run-kalkan" class="primary">Run with Kalkan</button>
+        </div>
+      </div>
+      <p id="outcome" class="outcome">Run the unprotected agent, then run it again with Kalkan.</p>
+      <div class="split">
+        <article>
+          <h3>Email the agent reads</h3>
+          <pre id="email">The email appears after a run.</pre>
+        </article>
+        <article>
+          <h3>Tool calls</h3>
+          <ol id="steps" class="steps"></ol>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Held-out detection</h2>
+        <button type="button" id="recompute">Recompute from the harness</button>
+      </div>
+      <p id="honesty" class="honesty">Loading harness output…</p>
+      <div id="chart" class="chart"></div>
+      <div id="false-blocks" class="false-blocks"></div>
+      <details>
+        <summary>Case audit</summary>
+        <div class="table-wrap">
+          <table id="cases">
+            <thead>
+              <tr>
+                <th>Case</th>
+                <th>Kind</th>
+                <th>Tool</th>
+                <th>Pass 1</th>
+                <th>Screen only</th>
+                <th>Kalkan</th>
+                <th>Expect</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Attacker loop</h2>
+        <button type="button" id="attack" class="primary">Generate EN and TR injections</button>
+      </div>
+      <p class="note">Train seeds only. These rows are not the held-out chart. In mock mode Muse Wonder is the local mutator, not a live model call.</p>
+      <p id="adapt-note"></p>
+      <div id="attack-summary" class="summary"></div>
+      <ol id="attacks" class="steps"></ol>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Recent decisions</h2>
+      </div>
+      <ol id="events" class="steps"></ol>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
