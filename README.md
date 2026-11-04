@@ -6,6 +6,14 @@ Pass 1 is a fast screen. Pass 2 is an intent judge. A built-in attacker replays 
 
 The name is the Turkish word for shield.
 
+**Demo video:** _link to be added_ · **Licence:** Apache-2.0
+
+![Kalkan dashboard in offline mock mode](docs/dashboard-mock.png)
+
+## Why it matters
+
+Tool-using agents read untrusted mail, documents, and web pages, then call tools that send mail or move files. One hidden instruction in that text can turn a summary request into data exfiltration. Meta evaluated Prompt Guard 2 on English, French, German, Hindi, Italian, Portuguese, Spanish, and Thai; Turkish is not among them. Kalkan does not rely on the screen alone: a second pass checks every proposed tool call against what the user actually asked for, so a paraphrased or non-English injection that slips past pass 1 still cannot buy the tool call it wanted.
+
 ## What works offline
 
 No Meta API key is required to run the demo, the tests, or the eval. Set `META_API_KEY` (or Meta's own name, `MODEL_API_KEY`) and Kalkan switches the judge and the attacker onto Meta Model API. Until then both calls go through a mock provider. The mock is labeled on every status payload and in the eval file. It is not Muse Spark and it is not Muse Wonder.
@@ -39,7 +47,7 @@ That is `docker compose up --build`. The three pieces run in one process, on por
 3. Run the **attacker loop**. It replays train seeds and paraphrases. A paraphrase can miss pass 1. Pass 2 still blocks the forward. A session literal then catches that exact string on replay. That literal is not a fine-tune.
 4. Read the **held-out chart**. The numbers on the page are the file the harness wrote. The banner under the chart is the harness honesty note, verbatim.
 
-The spoken script and shot list are in [DEMO.md](DEMO.md). The Cerebral Valley form draft is in [SUBMISSION.md](SUBMISSION.md).
+The spoken script and shot list are in [DEMO.md](DEMO.md).
 
 ## Architecture
 
@@ -153,7 +161,7 @@ kalkan eval --out evals/results/latest.json
 
 ## Open-source dependencies
 
-Kalkan's own code is copyright KENOPA LTD. All rights reserved. See [LICENSE](LICENSE). The packages below are imported, not vendored. Floors are in `pyproject.toml`. The versions in the table are what this environment resolved on 29 Oct 2026. CI installs from the floor, so a later resolve can pick a newer release of the same package. The licence expressions come from each distribution's metadata.
+Kalkan's own code is copyright 2026 KENOPA LTD and released under the Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE). The packages below are imported, not vendored. Floors are in `pyproject.toml`. The versions in the table are what this environment resolved on 29 Oct 2026. CI installs from the floor, so a later resolve can pick a newer release of the same package. The licence expressions come from each distribution's metadata.
 
 | Package | Version observed | Licence | Role |
 |---|---|---|---|
@@ -174,7 +182,7 @@ Llama Prompt Guard 2 weights are not shipped. Downloading them requires the Llam
 
 - The default screen is a regex heuristic with confusable folding and zero-width stripping. It misses paraphrases by design. That gap is what pass 2 is for.
 - The default judge is a deterministic reading of `policy/default.yaml`. A live Muse Spark verdict can differ. Trust live numbers only after `kalkan eval` has been re-run with a key, and read the honesty note in the new file.
-- There is no Prompt Guard fine-tune in this build. The attacker can append an exact missed string as a session literal. It is not written back to `policy/screen_patterns.yaml`, it does not change the held-out screen, and it is not a weight update. A Turkish fine-tune (the plan's Modal step) needs the Hugging Face gate and Modal credits.
+- There is no Prompt Guard fine-tune in this build. The attacker can append an exact missed string as a session literal. It is not written back to `policy/screen_patterns.yaml`, it does not change the held-out screen, and it is not a weight update. A Turkish fine-tune needs the Hugging Face gate and Modal credits.
 - The sandbox agent is not a model. It will not discover an exfil path that lacks a file cue plus a move cue plus an email address. The gate eval does not depend on that parser: every held-out row is a proposed tool call.
 - `confirm` is held, not executed. There is no human approval UI yet, only the decision.
 - The proxy has no authentication. Keep it on localhost. Do not put a live key in a world-reachable process.
@@ -182,10 +190,14 @@ Llama Prompt Guard 2 weights are not shipped. Downloading them requires the Llam
 - Arabic was a stretch goal and is not in the sets.
 - Prompt Guard 2's published eval does not include Turkish. This repo does not yet measure the base 86M model on these rows, because the weights are gated and no token is configured here.
 
-## Still needed from KENOPA
+## Running against live Meta models
 
-1. `META_API_KEY` (a Standard key, `LLM_…`) in the environment. Not in git, not in chat. A billing card was still pending when this was built, so nothing here has called Meta Model API.
-2. Confirmation that the $150 Model API credits, and any partner credits, have landed.
-3. Hugging Face licence acceptance for `meta-llama/Llama-Prompt-Guard-2-86M` by the account that will set `HF_TOKEN`, then a re-run of `kalkan eval` with `KALKAN_SCREEN=prompt-guard`.
-4. The demo video, recorded from [DEMO.md](DEMO.md). Say the on-screen mode out loud if it still says mock.
-5. Track confirmation: this repo assumes Startup, with KENOPA LTD as the organisation. The submission click itself is Erçin's.
+This build has not yet called Meta Model API or loaded the Prompt Guard 2 weights; every number above is mock mode. To switch to live mode:
+
+1. Set `META_API_KEY` (a Standard key, `LLM_…`) in the environment. Never commit it.
+2. Accept the Hugging Face licence for `meta-llama/Llama-Prompt-Guard-2-86M`, set `HF_TOKEN`, install the `prompt-guard` extra, and set `KALKAN_SCREEN=prompt-guard`.
+3. Re-run `kalkan eval --out evals/results/latest.json`. The honesty note in the new file will say live mode and name the model ids.
+
+## Licence
+
+Apache License 2.0. Copyright 2026 KENOPA LTD. See [LICENSE](LICENSE) and [NOTICE](NOTICE).

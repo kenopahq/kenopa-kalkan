@@ -126,7 +126,7 @@ def run_agent(
                 tool=call.name,
                 arguments=call.arguments,
                 executed=execute,
-                observation=observation if execute else observation,
+                observation=observation,
                 decision=decision,
             )
         )

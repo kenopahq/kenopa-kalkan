@@ -4,7 +4,7 @@ Three minutes. Record the dashboard at http://localhost:8080 after `make up` or 
 
 If the status card says `provider: mock` and `screen: heuristic`, say so. The chart in that mode is the offline harness. It is not a Llama Prompt Guard 2 number and it is not a Muse Spark number. If a key and the Prompt Guard weights are loaded, re-run `kalkan eval` first and read the new honesty line instead of the mock-mode line below.
 
-Do not show a real inbox, a real key, or a Gray Swan finding. The invoice and the address `finance-audit@external.example` are fixtures.
+Do not show a real inbox or a real key. The invoice and the address `finance-audit@external.example` are fixtures.
 
 ## Shot list
 

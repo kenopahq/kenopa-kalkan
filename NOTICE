@@ -1,5 +1,7 @@
 Kalkan
-Copyright 2026 KENOPA LTD. All rights reserved.
+Copyright 2026 KENOPA LTD
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
 
 This product can call Llama Prompt Guard 2 86M (meta-llama/Llama-Prompt-Guard-2-86M).
 The model weights are not shipped in this repository. Downloading or running
